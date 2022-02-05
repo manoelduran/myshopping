@@ -4,7 +4,7 @@ import { Container, Account, Title, Subtitle } from './styles';
 import { ButtonText } from '../../components/ButtonText';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 export function SignIn() {
   const [email, setEmail] = useState('');
@@ -41,6 +41,11 @@ export function SignIn() {
         };
       })
   };
+  function handleForgetPassword() {
+   auth()
+   .sendPasswordResetEmail(email)
+   .then(() => Alert.alert('Email para redefinir senha enviado para sua caixa de entrada!'))
+}
   return (
     <Container>
       <Title>MyShopping</Title>
@@ -62,7 +67,7 @@ export function SignIn() {
       <Button title="Entrar" onPress={handleSIgnInWithEmailAndPassword} />
 
       <Account>
-        <ButtonText title="Recuperar senha" onPress={() => { }} />
+        <ButtonText title="Recuperar senha" onPress={handleForgetPassword} />
         <ButtonText title="Criar minha conta" onPress={handleCreateUserAccount} />
       </Account>
     </Container>
